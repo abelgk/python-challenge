@@ -6,12 +6,12 @@ from operator import itemgetter
 vote_data = "Resources/election_data.csv"
 vote_data_analysed = "Resources/election_data_analysed.txt"
 
-vote_count = 0
-winning_votes = 0
+vote_count = 0 # to track the total number of voted cast
+#winning_votes = 0 
 number_of_candidates = 0 
-candidates_list = []
+candidates_list = [] # to store the list of candidates
 votes_won = {}
-biggest_vote = ["", 0]
+biggest_vote = ["", 0] #to hold the count for each candidate to determine the winner
 
 
 with open (vote_data) as poll_data:
@@ -38,8 +38,7 @@ with open (vote_data) as poll_data:
         #calculate the %votes each candidate won
     for opponent in votes_won:
         print(opponent + " " + str(round(((votes_won[opponent]/vote_count)*100))) + "%" + " (" + str(votes_won[opponent]) + ")") 
-        candidate_results = (opponent + " " + str(round(((votes_won[opponent]/vote_count)*100))) + "%" + " (" + str(votes_won[opponent]) + ")") 
-            #print(opponent)
+        #print(opponent)
     
     votes_won
     winning_candidate = sorted(votes_won.items(), key = itemgetter(1),reverse = True)
@@ -47,14 +46,13 @@ with open (vote_data) as poll_data:
     print("Winner: " + str(winning_candidate[0]))
     print("-------------------------")
 
-# Output Files
+# write results to text file
 with open(vote_data_analysed, "w") as txt_file:
     
     txt_file.write("Election Results")
     txt_file.write("\n")
     txt_file.write("-------------------------")
     txt_file.write("\n")
-    #txt_file.write(candidate + " " + str(round(((candidate_votes[candidate]/votes)*100))) + "%" + " (" + str(candidate_votes[candidate]) + ")")
     txt_file.write(str(winning_candidate))
     txt_file.write("\n")
     txt_file.write("-------------------------")
